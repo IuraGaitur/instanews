@@ -6,7 +6,6 @@ import draftToHtml from 'draftjs-to-html';
 import * as html2canvas from 'html2canvas'
 import * as React from 'react';
 import MediaQuery from 'react-responsive';
-// import RichTextEditor from 'react-rte';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
