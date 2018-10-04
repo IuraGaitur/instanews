@@ -1,0 +1,14 @@
+@font-face {
+  font-family: oxygen-bold;
+  src: url(assets/font/Oxygen-Bold.ttf);
+}
+
+@font-face {
+  font-family: oxygen-light;
+  src: url(assets/font/Oxygen-Light.ttf);
+}
+
+@font-face {
+  font-family: oxygen-regular;
+  src: url(assets/font/Oxygen-Regular.ttf);
+}
