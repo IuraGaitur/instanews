@@ -21,7 +21,7 @@ class TopMostTemplate extends React.Component<IProps, IState> {
         const {logo, text, backgroundColor} = this.props;
 
         return (
-            <div className="previewThumb center">
+            <div className="previewThumb center-hor relative">
                 <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%'}}>
                     <div className="preview-background"/>
                     <Rnd bounds="parent" enableResizing={this.disableResizing}

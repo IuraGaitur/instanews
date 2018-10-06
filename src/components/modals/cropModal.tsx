@@ -15,7 +15,7 @@ class CropModal extends React.Component<IProps, IState> {
     public render = () => {
         const {visible, imageUrl, source} = this.state;
         const aspectRation = source === 'logo' ? 0 : 9 / 16;
-        const style = source !== 'logo' ? {height: 400, width: '100%'} : {height: 50, width: '100%'};
+        const style = source !== 'logo' ? {height: 400, width: '100%'} : {height: 55, width: '100%'};
         return (
             <Modal
                 visible={visible}
@@ -56,7 +56,6 @@ class CropModal extends React.Component<IProps, IState> {
             imageSmoothingQuality: 'high'
         }).toDataURL('image/png');
         this.props.actionCrop(data, this.source);
-
     };
 
     private actionCropCancel = () => {

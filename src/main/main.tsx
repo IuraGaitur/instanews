@@ -3,10 +3,10 @@ import 'antd/dist/antd.css';
 import 'cropperjs/dist/cropper.css';
 import {convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import * as html2canvas from 'html2canvas'
 import * as React from 'react';
 import MediaQuery from 'react-responsive';
 import Slider from "react-slick";
+import domtoimage from 'retina-dom-to-image';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import '../assets/css/main.css';
@@ -57,13 +57,6 @@ class MainPage extends React.Component<{}, IState> {
             selected: false,
             title: 'Animation 2',
             type: TemplateType.Animation2
-        },
-        {
-            id: 7,
-            picture: 'images/template7.jpg',
-            selected: false,
-            title: 'Animation 3',
-            type: TemplateType.Animation3
         }];
     private cropModal: any;
     private slider: any;
@@ -211,11 +204,10 @@ class MainPage extends React.Component<{}, IState> {
 
     private takeScreenshot = (elementID: string) => {
         const preview = document.querySelector(elementID) as HTMLElement;
-
-        html2canvas(preview).then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            this.downloadURI(imgData, "instanews.png");
-        });
+        domtoimage.toPng(preview)
+            .then((dataUrl: any) => {
+                this.downloadURI(dataUrl, "instanews.png");
+            });
     };
 
     private downloadURI(uri: any, name: any) {

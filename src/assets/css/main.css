@@ -740,4 +740,24 @@ Mobile classes
     min-width: 50px !important;
 }
 
+.red-background {
+    background-color: #B63232;
+}
+
+.img-animation-1 {
+    clip-path: circle(60px at center);
+}
+
+
+.img-animation-2 {
+    clip-path: circle(100px at center);
+}
+
+.content-text {
+    padding: 4px 12px;
+}
+
+body {
+    font-family: "Verdana" !important;
+}
 

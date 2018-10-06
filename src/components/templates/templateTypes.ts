@@ -3,8 +3,7 @@ enum TemplateType {
     Breath,
     TopMost,
     Animation1,
-    Animation2,
-    Animation3,
+    Animation2
 }
 
 export default TemplateType;
