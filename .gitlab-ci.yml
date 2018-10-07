@@ -7,7 +7,8 @@ cache:
 before_script:
   - npm install
 
-
+variables:
+    PUBLIC_URL: "/InstaNews"
 pages:
   stage: deploy
   script:
