@@ -5,7 +5,7 @@ import {default as MainPage} from './../main/main'
 class Router extends React.Component {
     public render() {
         return (
-            <AppRouter basename={process.env.PUBLIC_URL}>
+            <AppRouter>
                 <Switch>
                     <Route exact={true} path="/" component={MainPage}/>
                 </Switch>
