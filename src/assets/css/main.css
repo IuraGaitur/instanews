@@ -487,13 +487,6 @@ Mobile classes
         line-height: 22px;
     }
 
-    .content {
-        padding: 0 8px;
-        background-color: #F5F5F5;
-        padding-top: 20%;
-        margin-bottom: auto;
-    }
-
     .header-background {
         width: 100%;
         height: 60px;
@@ -501,7 +494,17 @@ Mobile classes
         display: flex;
         flex-direction: row;
         justify-content: center;
+    }
 
+    .content {
+        padding: 0 8px;
+        padding-top: 20%;
+        padding-bottom: 30%;
+        margin-bottom: auto;
+    }
+
+    .footer-element {
+        height: 46px;
     }
 
     .header-picture {
@@ -629,9 +632,7 @@ Mobile classes
         margin-top: 2px;
     }
 
-    .footer-element {
-        height: 53px;
-    }
+
 
     .footer-text {
         color: white;
@@ -676,6 +677,12 @@ Mobile classes
         position: absolute;
         bottom: 0;
         width: 100%;
+    }
+
+    .text-content {
+        width: 400px;
+        display: inline-block;
+        padding-right: 50px;
     }
 }
 
@@ -757,7 +764,15 @@ Mobile classes
     padding: 4px 12px;
 }
 
-body {
-    font-family: "Verdana" !important;
+.ant-btn-primary {
+    color: #fff;
+    background-color: #D9486E;
+    border-color: #D9486E;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #fff;
+    background-color: #D9486E;
+    border-color: red;
 }
 

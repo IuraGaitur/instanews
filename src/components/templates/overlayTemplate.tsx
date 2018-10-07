@@ -22,9 +22,9 @@ class OverlayTemplate extends React.Component<IProps, IState> {
         const {image, logo, text, backgroundColor} = this.props; // logo
 
         return (
-            <div className="previewThumb center-hor relative">
-                <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%', position: 'relative'}}>
-                    <div className="preview-background"/>
+            <div className="previewThumb center-hor relative gray-box ">
+                <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%', position: 'relative', 'minWidth': '185px'}}>
+                    <div className="preview-background "/>
                     <img src={image} className="previewThumb" style={{width: '100%', height: '100%'}}/>
                     <Rnd
                         style={{

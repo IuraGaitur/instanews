@@ -59,6 +59,7 @@ class MainPage extends React.Component<{}, IState> {
             type: TemplateType.Animation2
         }];
     private cropModal: any;
+    private cropModalMobile: any;
     private slider: any;
 
     constructor(props: any) {
@@ -137,8 +138,10 @@ class MainPage extends React.Component<{}, IState> {
                                              backgroundImg={backgroundImg}
                                              logoImg={logoImg}
                                              actionBackColorChange={this.actionBackColorChange}
-                                             actionOnUpload={this.actionOnUpload}
+                                             actionOnUpload={this.actionOnUploadMobile}
                                              actionChangeText={this.actionChangeText}/>
+                                    <CropModal ref={ref => this.cropModalMobile = ref}
+                                               actionCrop={this.actionOnCrop}/>
                                 </div>
                                 <div className="content">
                                     <div className="previewMobile">
@@ -150,6 +153,7 @@ class MainPage extends React.Component<{}, IState> {
                                             device='mobile'
                                             previewType={templateType}
                                             actionCreateInsta={this.actionCreateInstaNews}/>
+
                                     </div>
                                 </div>
                             </Slider>
@@ -177,6 +181,10 @@ class MainPage extends React.Component<{}, IState> {
 
     private actionOnUpload = (data: any, type: string) => {
         this.cropModal.showCropModal(data, type);
+    };
+
+    private actionOnUploadMobile = (data: any, type: string) => {
+        this.cropModalMobile.showCropModal(data, type);
     };
 
     private actionOnCrop = (data: any, type: string) => {

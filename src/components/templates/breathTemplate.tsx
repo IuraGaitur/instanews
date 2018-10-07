@@ -21,9 +21,9 @@ class BreathTemplate extends React.Component<IProps, IState> {
         const {image, logo, text, backgroundColor} = this.props;
 
         return (
-            <div className="previewThumb center-hor relative">
-                <div className="preview-background"/>
-                <div style={{width: '100%', height: '100%', 'backgroundColor': backgroundColor}}>
+            <div className="previewThumb center-hor relative gray-box ">
+                <div className="preview-background "/>
+                <div style={{width: '100%', height: '100%', 'backgroundColor': backgroundColor, 'minWidth': '185px'}}>
                     <div style={{height: '30%', display: 'block'}}>
                         <Rnd bounds="parent" enableResizing={this.disableResizing}
                              position={{ x: this.state.textX, y: this.state.textY }}

@@ -20,7 +20,7 @@ class Preview extends React.Component<IProps, {}> {
         return (
             <div className="preview">
                 <h2 className="subtitle">Result</h2>
-                <div className={"gray-box center preview-picture-" + device}>
+                <div className={"center preview-picture-" + device}>
                     {template}
                 </div>
 
@@ -53,6 +53,7 @@ class Preview extends React.Component<IProps, {}> {
                 return (
                     <Animation2Template text={text} backgroundColor={backgroundColor}
                                         image={backgroundImg} logo={logo}/>);
+
             default:
                 return (
                     <OverlayTemplate text={text} backgroundColor={backgroundColor}

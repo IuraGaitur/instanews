@@ -21,9 +21,9 @@ class Animation2Template extends React.Component<IProps, IState> {
         const {image, logo, text, backgroundColor} = this.props;
 
         return (
-            <div className="previewThumb center-hor relative">
-                <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%'}}>
-                    <div className="preview-background"/>
+            <div className="previewThumb center-hor relative gray-box ">
+                <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%', 'minWidth': '185px'}}>
+                    <div className="preview-background "/>
                     <img src={image} className="previewThumb img-animation-2" style={{width: '100%', height: '100%'}}/>
                     <Rnd bounds="parent" enableResizing={this.disableResizing}
                          position={{ x: this.state.textX, y: this.state.textY }}
