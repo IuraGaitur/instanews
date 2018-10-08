@@ -15,11 +15,12 @@ class CropModal extends React.Component<IProps, IState> {
     public render = () => {
         const {visible, imageUrl, source} = this.state;
         const aspectRation = source === 'logo' ? 0 : 9 / 16;
-        const style = source !== 'logo' ? {height: 400, width: '100%'} : {height: 55, width: '100%'};
+        const style = {height: 300, width: '100%'};
+        const title = source !== 'logo' ? 'Add Cover Image' : 'Add Logo Image';
         return (
             <Modal
                 visible={visible}
-                title="Add Cover Image"
+                title={title}
                 onOk={this.actionCropOk}
                 onCancel={this.actionCropCancel}
                 footer={[
@@ -37,8 +38,6 @@ class CropModal extends React.Component<IProps, IState> {
     };
 
     public showCropModal = (data: any, sourceUrl: string) => {
-        console.log(data, sourceUrl);
-
         this.source = sourceUrl;
         this.setState({visible: true, imageUrl: data, source: sourceUrl});
     };

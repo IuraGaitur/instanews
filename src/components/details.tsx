@@ -1,6 +1,6 @@
 import {Col, Popover, Row} from 'antd';
 import * as React from "react";
-import {CompactPicker} from 'react-color';
+import {SketchPicker} from 'react-color';
 import Avatar from "./avatar";
 import TextLayout from "./textLayout";
 
@@ -26,7 +26,7 @@ class Details extends React.Component<IProps, {}> {
                             <Popover title="Color"
                                      trigger="click"
                                      content={<div>
-                                         <CompactPicker color={backgroundColor}
+                                         <SketchPicker color={backgroundColor}
                                                         onChangeComplete={ actionBackColorChange }/>
                                      </div>}>
                                 <div className="center ant-upload ant-upload-select-picture-card">
@@ -42,7 +42,9 @@ class Details extends React.Component<IProps, {}> {
                         </Col>
                         <Col>
                             <span className="subtitle">Logo</span>
-                            <Avatar onUpload={actionOnUpload} imageUrl={logoImg} type='logo'/>
+                            <div className="left">
+                                <Avatar onUpload={actionOnUpload} imageUrl={logoImg} type='logo'/>
+                            </div>
                         </Col>
 
                     </div>

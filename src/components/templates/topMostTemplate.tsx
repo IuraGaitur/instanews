@@ -8,11 +8,11 @@ class TopMostTemplate extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            height: 18,
+            height: 30,
             textX: 0,
             textY: 200,
-            width: 91,
-            x: 80,
+            width: '100%',
+            x: 0,
             y: 10
         };
     }
@@ -21,7 +21,7 @@ class TopMostTemplate extends React.Component<IProps, IState> {
         const {logo, text, backgroundColor} = this.props;
 
         return (
-            <div className="previewThumb center-hor relative gray-box ">
+            <div className="previewThumb center-hor relative gray-box topMostTemplate">
                 <div style={{'backgroundColor': backgroundColor, width: '100%', height: '100%', 'minWidth': '185px'}}>
                     <div className="preview-background "/>
                     <Rnd bounds="parent" enableResizing={this.disableResizing}
@@ -43,7 +43,7 @@ class TopMostTemplate extends React.Component<IProps, IState> {
                             backgroundImage: "url('" + logo + "')",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover"
+                            backgroundSize: "contain"
                         }}
                         size={{width: this.state.width, height: this.state.height}}
                         position={{x: this.state.x, y: this.state.y}}
