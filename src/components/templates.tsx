@@ -15,7 +15,7 @@ class Templates extends React.Component<IProps, {}> {
                 <h3 className="subtitle">Select template</h3>
                 <Row className="thumbs">
                     {templates.map((item: any, pos: number, items: any) =>
-                        <Col key={item.id} xs={{span: 10, offset: (pos % 2 === 0) ? 0 : 1}}
+                        <Col key={item.id} xs={{span: 15, offset: (pos % 2 === 0) ? 0 : 1}}
                              lg={{span: 6, offset: (pos === 0) ? 0 : 1}}
                              id={'thumb' + item.id} className="gutter-box">
                             <Card hoverable={item.selected ? false : true}

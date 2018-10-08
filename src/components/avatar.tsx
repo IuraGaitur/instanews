@@ -1,7 +1,7 @@
 import {Icon, Upload} from 'antd';
 import * as React from 'react';
 
-class Avatar extends React.Component<IProps, IState> {
+class   Avatar extends React.Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
