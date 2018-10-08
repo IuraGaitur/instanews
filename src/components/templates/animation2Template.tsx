@@ -42,7 +42,7 @@ class Animation2Template extends React.Component<IProps, IState> {
                             backgroundImage: "url('" + logo + "')",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover"
+                            backgroundSize: "contain"
                         }}
                         size={{width: this.state.width, height: this.state.height}}
                         position={{x: this.state.x, y: this.state.y}}
