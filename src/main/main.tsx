@@ -1,8 +1,6 @@
 import {Col, Layout, Row} from 'antd';
 import 'antd/dist/antd.css';
 import 'cropperjs/dist/cropper.css';
-// import { EditorState } from 'draft-js';
-// import draftToHtml from 'draftjs-to-html';
 import * as React from 'react';
 import MediaQuery from 'react-responsive';
 import Slider from "react-slick";
@@ -24,13 +22,19 @@ class MainPage extends React.Component<{}, IState> {
 
     private templates = [
         {
+            cropDimension: 9 / 16,
+            hasBackground: false,
+            hasCover: true,
             id: 1,
             picture: 'images/template1.jpg',
             selected: true,
             title: 'Overlay Info',
-            type: TemplateType.Overlay
+            type: TemplateType.Overlay,
         },
         {
+            cropDimension: 0.8,
+            hasBackground: true,
+            hasCover: true,
             id: 3,
             picture: 'images/template3.jpg',
             selected: false,
@@ -38,6 +42,9 @@ class MainPage extends React.Component<{}, IState> {
             type: TemplateType.Breath
         },
         {
+            cropDimension: 9 / 16,
+            hasBackground: true,
+            hasCover: false,
             id: 4,
             picture: 'images/template4.jpg',
             selected: false,
@@ -45,6 +52,9 @@ class MainPage extends React.Component<{}, IState> {
             type: TemplateType.TopMost
         },
         {
+            cropDimension: 1,
+            hasBackground: true,
+            hasCover: true,
             id: 5,
             picture: 'images/template5.jpg',
             selected: false,
@@ -52,6 +62,9 @@ class MainPage extends React.Component<{}, IState> {
             type: TemplateType.Animation1
         },
         {
+            cropDimension: 1,
+            hasBackground: true,
+            hasCover: true,
             id: 6,
             picture: 'images/template6.jpg',
             selected: false,
@@ -65,10 +78,11 @@ class MainPage extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
+            activeTemplate: this.templates[0],
             backgroundColor: 'transparent',
             backgroundImg: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
             layoutText: '',
-            logoImg: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+            logoImg: localStorage.getItem("logoImg"),
             templateType: TemplateType.Overlay,
             templates: this.templates,
             text: 'Please insert your text here'
@@ -77,7 +91,7 @@ class MainPage extends React.Component<{}, IState> {
 
     public render() {
         const {Content, Sider} = Layout;
-        const { text, backgroundImg, logoImg, templateType, backgroundColor} = this.state;
+        const {text, backgroundImg, logoImg, templateType, backgroundColor, activeTemplate} = this.state;
 
         return (
             <Layout className="layout">
@@ -94,6 +108,8 @@ class MainPage extends React.Component<{}, IState> {
                                 </Row>
                                 <Row>
                                     <Details text={text}
+                                             hasBackground={activeTemplate.hasBackground}
+                                             hasCoverImage={activeTemplate.hasCover}
                                              backgroundColor={backgroundColor}
                                              backgroundImg={backgroundImg}
                                              logoImg={logoImg}
@@ -103,7 +119,8 @@ class MainPage extends React.Component<{}, IState> {
                                 </Row>
                             </Col>
                             <CropModal ref={ref => this.cropModal = ref}
-                                       actionCrop={this.actionOnCrop}/>
+                                       actionCrop={this.actionOnCrop}
+                                       size={activeTemplate.cropDimension}/>
                         </Content>
                         <Sider className="sider" width={'40%'}>
                             <div className="previewDesktop">
@@ -134,14 +151,18 @@ class MainPage extends React.Component<{}, IState> {
                                 </div>
                                 <div className="content">
                                     <Details text={text}
+                                             hasBackground={activeTemplate.hasBackground}
+                                             hasCoverImage={activeTemplate.hasCover}
                                              backgroundColor={backgroundColor}
                                              backgroundImg={backgroundImg}
                                              logoImg={logoImg}
                                              actionBackColorChange={this.actionBackColorChange}
                                              actionOnUpload={this.actionOnUploadMobile}
                                              actionChangeText={this.actionChangeText}/>
+
                                     <CropModal ref={ref => this.cropModalMobile = ref}
-                                               actionCrop={this.actionOnCrop}/>
+                                               actionCrop={this.actionOnCrop}
+                                               size={activeTemplate.cropDimension}/>
                                 </div>
                                 <div className="content">
                                     <div className="previewMobile">
@@ -175,7 +196,7 @@ class MainPage extends React.Component<{}, IState> {
     };
 
     private actionChangeText = (value: any) => {
-        this.setState({ text: value.target.value});
+        this.setState({text: value.target.value});
     };
 
     private actionOnUpload = (data: any, type: string) => {
@@ -190,6 +211,7 @@ class MainPage extends React.Component<{}, IState> {
         if (type === 'background') {
             this.setState({backgroundImg: data});
         } else {
+            localStorage.setItem("logoImg", data);
             this.setState({logoImg: data});
         }
     };
@@ -197,7 +219,8 @@ class MainPage extends React.Component<{}, IState> {
     private actionTemplateClick = (pos: number, items: any) => {
         items.forEach((item: any) => item.selected = false);
         items[pos].selected = true;
-        this.setState({templates: items, templateType: items[pos].type});
+        this.setState({activeTemplate: items[pos], templates: items, templateType: items[pos].type});
+
 
     };
 
@@ -235,6 +258,7 @@ class MainPage extends React.Component<{}, IState> {
 }
 
 interface IState {
+    activeTemplate: any,
     backgroundColor: any,
     text: string,
     layoutText: string,

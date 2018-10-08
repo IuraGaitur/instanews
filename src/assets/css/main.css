@@ -219,6 +219,10 @@ textarea:focus {
   width: 250px;
   height: 444px; }
 
+.previewThumbBreath {
+  width: 250px;
+  height: auto; }
+
 .text-content {
   width: 450px;
   display: inline-block;
@@ -227,8 +231,7 @@ textarea:focus {
 .upload-content {
   display: flex;
   flex: 1;
-  flex-direction: row;
-  justify-content: space-between; }
+  flex-direction: row; }
 
 .btn-add {
   width: 70px;
@@ -604,6 +607,9 @@ Mobile classes
   color: #fff;
   background-color: #D9486E;
   border-color: red; }
+
+.space-right {
+  margin-right: 20px; }
 
 .animation1template .content-text {
   text-align: center;

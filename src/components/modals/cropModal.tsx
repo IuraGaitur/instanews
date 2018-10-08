@@ -9,12 +9,14 @@ class CropModal extends React.Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
-        this.state = {imageUrl: '', visible: false, source: ''};
+        this.state = {imageUrl: '', visible: false, source: '' };
     }
 
     public render = () => {
         const {visible, imageUrl, source} = this.state;
-        const aspectRation = source === 'logo' ? 0 : 9 / 16;
+        const {size} = this.props;
+
+        const aspectRation = source === 'logo' ? 0 : size;
         const style = {height: 300, width: '100%'};
         const title = source !== 'logo' ? 'Add Cover Image' : 'Add Logo Image';
         return (
@@ -63,7 +65,8 @@ class CropModal extends React.Component<IProps, IState> {
 }
 
 interface IProps {
-    actionCrop: any
+    actionCrop: any,
+    size: number
 }
 
 interface IState {

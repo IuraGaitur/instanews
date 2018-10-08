@@ -12,7 +12,9 @@ class Details extends React.Component<IProps, {}> {
     }
 
     public render = () => {
-        const {text, backgroundColor, actionBackColorChange, actionChangeText, actionOnUpload, backgroundImg, logoImg} = this.props;
+        const {text, backgroundColor, actionBackColorChange, actionChangeText,
+                actionOnUpload, backgroundImg, logoImg,
+                hasBackground, hasCoverImage} = this.props;
         return (
             <div>
                 <Row type="flex" justify="start" align="top" className="content-margin">
@@ -21,26 +23,29 @@ class Details extends React.Component<IProps, {}> {
                                     actionChangeText={actionChangeText}/>
                     </Col>
                     <div className="upload-content">
-                        <Col>
+                        {hasBackground &&
+                        <Col className="space-right">
                             <span className="subtitle">Background</span>
                             <Popover title="Color"
                                      trigger="click"
                                      content={<div>
                                          <SketchPicker color={backgroundColor}
-                                                        onChangeComplete={ actionBackColorChange }/>
+                                                       onChangeComplete={ actionBackColorChange }/>
                                      </div>}>
                                 <div className="center ant-upload ant-upload-select-picture-card">
                                     <div style={{'width': '70px', 'height': '70px', margin: '8px', 'backgroundColor': backgroundColor}}/>
                                 </div>
                             </Popover>
                         </Col>
-                        <Col >
+                        }
+                        {hasCoverImage &&
+                        <Col className="space-right">
                             <span className="subtitle">Cover</span>
                             <div className="left">
                                 <Avatar onUpload={actionOnUpload} imageUrl={backgroundImg} type='background'/>
                             </div>
-                        </Col>
-                        <Col>
+                        </Col>}
+                        <Col className="space-right">
                             <span className="subtitle">Logo</span>
                             <div className="left">
                                 <Avatar onUpload={actionOnUpload} imageUrl={logoImg} type='logo'/>
@@ -61,7 +66,9 @@ interface IProps {
     logoImg: string,
     actionOnUpload: any,
     actionChangeText: any,
-    actionBackColorChange: any
+    actionBackColorChange: any,
+    hasBackground: boolean,
+    hasCoverImage: boolean
 }
 
 export default Details;
