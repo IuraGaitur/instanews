@@ -2,7 +2,7 @@
   "name": "insta-news-builder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://iurie.gaitur.gitlab.io/InstaNews/",
+  "homepage": "https://iurie.gaitur.gitlab.io",
   "dependencies": {
     "@types/html2canvas": "0.0.33",
     "@types/react-color": "^2.13.6",
