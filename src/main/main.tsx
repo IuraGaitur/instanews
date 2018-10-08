@@ -1,8 +1,8 @@
 import {Col, Layout, Row} from 'antd';
 import 'antd/dist/antd.css';
 import 'cropperjs/dist/cropper.css';
-import {convertToRaw, EditorState } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
+// import { EditorState } from 'draft-js';
+// import draftToHtml from 'draftjs-to-html';
 import * as React from 'react';
 import MediaQuery from 'react-responsive';
 import Slider from "react-slick";
@@ -65,19 +65,19 @@ class MainPage extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
             backgroundImg: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
             layoutText: '',
             logoImg: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
             templateType: TemplateType.Overlay,
             templates: this.templates,
-            text: EditorState.createEmpty()
+            text: 'Please insert your text here'
         };
     }
 
     public render() {
         const {Content, Sider} = Layout;
-        const { text, backgroundImg, logoImg, templateType, layoutText, backgroundColor} = this.state;
+        const { text, backgroundImg, logoImg, templateType, backgroundColor} = this.state;
 
         return (
             <Layout className="layout">
@@ -111,7 +111,7 @@ class MainPage extends React.Component<{}, IState> {
                                     backgroundImg={backgroundImg}
                                     backgroundColor={backgroundColor}
                                     logo={logoImg}
-                                    text={layoutText}
+                                    text={text}
                                     previewType={templateType}
                                     actionCreateInsta={this.actionCreateInstaNews}
                                     device='desktop'/>
@@ -149,7 +149,7 @@ class MainPage extends React.Component<{}, IState> {
                                             backgroundImg={backgroundImg}
                                             backgroundColor={backgroundColor}
                                             logo={logoImg}
-                                            text={layoutText}
+                                            text={text}
                                             device='mobile'
                                             previewType={templateType}
                                             actionCreateInsta={this.actionCreateInstaNews}/>
@@ -171,12 +171,11 @@ class MainPage extends React.Component<{}, IState> {
     }
 
     private actionBackColorChange = (color: any) => {
-        this.setState({backgroundColor: color.hex});
+        this.setState({backgroundColor: `rgba(${ color.rgb.r }, ${ color.rgb.g }, ${ color.rgb.b }, ${ color.rgb.a })`});
     };
 
     private actionChangeText = (value: any) => {
-        const text = draftToHtml(convertToRaw(value.getCurrentContent()))
-        this.setState({layoutText: text, text: value});
+        this.setState({ text: value.target.value});
     };
 
     private actionOnUpload = (data: any, type: string) => {
