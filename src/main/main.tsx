@@ -2,6 +2,7 @@ import {Col, Layout, Row} from 'antd';
 import 'antd/dist/antd.css';
 import 'cropperjs/dist/cropper.css';
 import * as React from 'react';
+import * as ReactGA from 'react-ga';
 import MediaQuery from 'react-responsive';
 import Slider from "react-slick";
 import domtoimage from 'retina-dom-to-image';
@@ -87,6 +88,10 @@ class MainPage extends React.Component<{}, IState> {
             templates: this.templates,
             text: 'Please insert your text here'
         };
+        ReactGA.initialize('UA-127299798-1', {
+            debug: false,
+            titleCase: false
+        });
     }
 
     public render() {
@@ -214,14 +219,13 @@ class MainPage extends React.Component<{}, IState> {
             localStorage.setItem("logoImg", data);
             this.setState({logoImg: data});
         }
+        this.sendCropEvent(type)
     };
 
     private actionTemplateClick = (pos: number, items: any) => {
         items.forEach((item: any) => item.selected = false);
         items[pos].selected = true;
         this.setState({activeTemplate: items[pos], templates: items, templateType: items[pos].type});
-
-
     };
 
     private actionCreateInstaNews = () => {
@@ -246,6 +250,8 @@ class MainPage extends React.Component<{}, IState> {
         link.href = uri;
         document.body.appendChild(link);
         link.click();
+        this.sendFinalTemplate(this.state.activeTemplate.title);
+        this.sendDownloadEvent();
     }
 
     private moveNextPage = () => {
@@ -255,6 +261,29 @@ class MainPage extends React.Component<{}, IState> {
     private movePrevPage = () => {
         this.slider.slickPrev();
     };
+
+    private sendCropEvent = (type: string) => {
+        ReactGA.event({
+            action: 'Crop',
+            category: 'Action',
+            label: type
+        });
+    }
+
+    private sendFinalTemplate = (template: string) => {
+        ReactGA.event({
+            action: 'Template',
+            category: 'Action',
+            label: template
+        });
+    }
+
+    private sendDownloadEvent = () => {
+        ReactGA.event({
+            action: 'Download',
+            category: 'Action'
+        });
+    }
 }
 
 interface IState {
