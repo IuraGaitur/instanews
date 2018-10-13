@@ -1,7 +1,7 @@
 import {Icon, Upload} from 'antd';
 import * as React from 'react';
 
-class   Avatar extends React.Component<IProps, IState> {
+class Avatar extends React.Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
@@ -9,7 +9,7 @@ class   Avatar extends React.Component<IProps, IState> {
     }
 
     public componentWillReceiveProps(nextProps: any) {
-        if(this.props.imageUrl !== null && this.props.imageUrl !== nextProps.imageUrl) {
+        if (this.props.imageUrl !== null && this.props.imageUrl !== nextProps.imageUrl) {
             this.setState({loading: false});
         }
     }
@@ -19,12 +19,13 @@ class   Avatar extends React.Component<IProps, IState> {
         const {imageUrl} = this.props;
         const uploadButton = (
             <div className="btn-add">
-                <Icon type={loading ? 'loading' : 'plus'} />
+                <Icon type={loading ? 'loading' : 'plus'}/>
                 <span className="ant-upload-text">Upload</span>
             </div>
         );
         return (
             <Upload
+                accept="image/*"
                 beforeUpload={this.handleBeforeUpload}
                 listType="picture-card"
                 className="avatar-uploader"
@@ -35,13 +36,15 @@ class   Avatar extends React.Component<IProps, IState> {
     };
 
     public setLoading = (state: boolean) => {
+        console.log("Setting state", state);
         this.setState({loading: state});
     };
 
     private handleBeforeUpload = (info: any) => {
         const uploadCallback = this.props.onUpload;
-        getBase64(info, (data: any) => {
-            this.setLoading(true);
+        this.setLoading(true);
+        this.getBase64(info, (data: any) => {
+            this.setLoading(false);
             uploadCallback(data, this.props.type,);
         });
         return false;
@@ -49,14 +52,17 @@ class   Avatar extends React.Component<IProps, IState> {
 
     private isNotEmptyPic = (data: string) => {
         return data != null && data !== 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+    };
+
+    private getBase64(img: any, callback: any) {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            callback(reader.result)
+        });
+        reader.readAsDataURL(img);
     }
 }
 
-function getBase64(img: any, callback: any) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-}
 
 interface IState {
     loading: boolean

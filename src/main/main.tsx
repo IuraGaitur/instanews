@@ -18,14 +18,15 @@ import Swipe from "../components/swipe/swipe";
 import Templates from "../components/templates";
 import TemplateType from '../components/templates/templateTypes';
 
-
 class MainPage extends React.Component<{}, IState> {
 
+    private initialText = 'Please insert your text here';
     private templates = [
         {
             cropDimension: 9 / 16,
             hasBackground: false,
             hasCover: true,
+            hasSecondText: false,
             id: 1,
             picture: 'images/template1.jpg',
             selected: true,
@@ -36,6 +37,7 @@ class MainPage extends React.Component<{}, IState> {
             cropDimension: 0.8,
             hasBackground: true,
             hasCover: true,
+            hasSecondText: false,
             id: 3,
             picture: 'images/template3.jpg',
             selected: false,
@@ -46,6 +48,7 @@ class MainPage extends React.Component<{}, IState> {
             cropDimension: 9 / 16,
             hasBackground: true,
             hasCover: false,
+            hasSecondText: true,
             id: 4,
             picture: 'images/template4.jpg',
             selected: false,
@@ -56,6 +59,7 @@ class MainPage extends React.Component<{}, IState> {
             cropDimension: 1,
             hasBackground: true,
             hasCover: true,
+            hasSecondText: false,
             id: 5,
             picture: 'images/template5.jpg',
             selected: false,
@@ -66,6 +70,7 @@ class MainPage extends React.Component<{}, IState> {
             cropDimension: 1,
             hasBackground: true,
             hasCover: true,
+            hasSecondText: false,
             id: 6,
             picture: 'images/template6.jpg',
             selected: false,
@@ -78,15 +83,17 @@ class MainPage extends React.Component<{}, IState> {
 
     constructor(props: any) {
         super(props);
+        document.title="InstaNews";
         this.state = {
             activeTemplate: this.templates[0],
             backgroundColor: 'transparent',
             backgroundImg: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
             layoutText: '',
             logoImg: localStorage.getItem("logoImg"),
+            secondText: '',
             templateType: TemplateType.Overlay,
             templates: this.templates,
-            text: 'Please insert your text here'
+            text: this.initialText
         };
         ReactGA.initialize('UA-127299798-1', {
             debug: false,
@@ -96,7 +103,7 @@ class MainPage extends React.Component<{}, IState> {
 
     public render() {
         const {Content, Sider} = Layout;
-        const {text, backgroundImg, logoImg, templateType, backgroundColor, activeTemplate} = this.state;
+        const {text, backgroundImg, logoImg, templateType, backgroundColor, activeTemplate, secondText} = this.state;
 
         return (
             <Layout className="layout">
@@ -120,7 +127,11 @@ class MainPage extends React.Component<{}, IState> {
                                              logoImg={logoImg}
                                              actionBackColorChange={this.actionBackColorChange}
                                              actionOnUpload={this.actionOnUpload}
-                                             actionChangeText={this.actionChangeText}/>
+                                             actionClickText={this.actionClickText}
+                                             actionChangeText={this.actionChangeText}
+                                             hasSecondText={activeTemplate.hasSecondText}
+                                             secondText={secondText}
+                                             actionChangeTextSecond={this.actionChangeSecondText}/>
                                 </Row>
                             </Col>
                             <CropModal ref={ref => this.cropModal = ref}
@@ -134,6 +145,7 @@ class MainPage extends React.Component<{}, IState> {
                                     backgroundColor={backgroundColor}
                                     logo={logoImg}
                                     text={text}
+                                    secondText={secondText}
                                     previewType={templateType}
                                     actionCreateInsta={this.actionCreateInstaNews}
                                     device='desktop'/>
@@ -163,8 +175,11 @@ class MainPage extends React.Component<{}, IState> {
                                              logoImg={logoImg}
                                              actionBackColorChange={this.actionBackColorChange}
                                              actionOnUpload={this.actionOnUploadMobile}
-                                             actionChangeText={this.actionChangeText}/>
-
+                                             actionClickText={this.actionClickText}
+                                             actionChangeText={this.actionChangeText}
+                                             hasSecondText={activeTemplate.hasSecondText}
+                                             secondText={secondText}
+                                             actionChangeTextSecond={this.actionChangeSecondText}/>
                                     <CropModal ref={ref => this.cropModalMobile = ref}
                                                actionCrop={this.actionOnCrop}
                                                size={activeTemplate.cropDimension}/>
@@ -176,6 +191,7 @@ class MainPage extends React.Component<{}, IState> {
                                             backgroundColor={backgroundColor}
                                             logo={logoImg}
                                             text={text}
+                                            secondText={secondText}
                                             device='mobile'
                                             previewType={templateType}
                                             actionCreateInsta={this.actionCreateInstaNews}/>
@@ -200,8 +216,20 @@ class MainPage extends React.Component<{}, IState> {
         this.setState({backgroundColor: `rgba(${ color.rgb.r }, ${ color.rgb.g }, ${ color.rgb.b }, ${ color.rgb.a })`});
     };
 
+    private actionClickText = () => {
+        console.log("Click for textarea");
+        if (this.state.text === this.initialText) {
+            this.setState({text: ''})
+        }
+        return;
+    };
+
     private actionChangeText = (value: any) => {
         this.setState({text: value.target.value});
+    };
+
+    private actionChangeSecondText = (value: any) => {
+        this.setState({secondText: value.target.value});
     };
 
     private actionOnUpload = (data: any, type: string) => {
@@ -294,7 +322,8 @@ interface IState {
     backgroundImg: string,
     logoImg: string,
     templateType: any,
-    templates: any
+    templates: any,
+    secondText: string
 }
 
 export default MainPage;

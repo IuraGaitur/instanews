@@ -14,8 +14,8 @@ class Preview extends React.Component<IProps, {}> {
     }
 
     public render = () => {
-        const {backgroundImg, backgroundColor, logo, text, actionCreateInsta, previewType, device} = this.props;
-        const template = this.getTemplate(previewType, text, backgroundColor, backgroundImg, logo);
+        const {backgroundImg, backgroundColor, logo, text, actionCreateInsta, previewType, device, secondText} = this.props;
+        const template = this.getTemplate(previewType, text, backgroundColor, backgroundImg, logo, secondText);
 
         return (
             <div className="preview">
@@ -31,7 +31,7 @@ class Preview extends React.Component<IProps, {}> {
         );
     };
 
-    private getTemplate = (type: any, text: string, backgroundColor: string, backgroundImg: string, logo: string) => {
+    private getTemplate = (type: any, text: string, backgroundColor: string, backgroundImg: string, logo: string, secondText: string,) => {
         switch (type) {
             case TemplateType.Overlay:
                 return (
@@ -44,7 +44,7 @@ class Preview extends React.Component<IProps, {}> {
             case TemplateType.TopMost:
                 return (
                     <TopMostTemplate text={text} backgroundColor={backgroundColor}
-                                     image={backgroundImg} logo={logo}/>);
+                                     image={backgroundImg} logo={logo} secondText={secondText}/>);
             case TemplateType.Animation1:
                 return (
                     <Animation1Template text={text} backgroundColor={backgroundColor}
@@ -67,6 +67,7 @@ interface IProps {
     backgroundColor: string,
     logo: string,
     text: string,
+    secondText: string,
     actionCreateInsta: any,
     previewType: any
     device: string

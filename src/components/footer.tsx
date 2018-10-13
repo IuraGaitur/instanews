@@ -13,8 +13,8 @@ class FooterView extends React.Component<{}, {}> {
         return (
             <Footer className="footer-ant">
                 <div className="footer">
-                    <span className="footer-text">Powered by: Iurie Gaitur</span>
-                    <span className="footer-text">Contact us : iura.gaitur@gmail.com</span>
+                    <span className="footer-text">Powered by: SensMedia</span>
+                    <span className="footer-text">Contact us: iura.gaitur@gmail.com</span>
                 </div>
             </Footer>
         );

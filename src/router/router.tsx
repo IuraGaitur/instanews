@@ -7,7 +7,7 @@ class Router extends React.Component {
         return (
             <AppRouter basename={process.env.PUBLIC_URL}>
                 <Switch>
-                    <Route exact={true} path="/" component={MainPage}/>
+                    <Route exact={true} path="/" component={MainPage} title="InstaNews"/>
                 </Switch>
             </AppRouter>
         );

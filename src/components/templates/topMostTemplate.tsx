@@ -18,7 +18,7 @@ class TopMostTemplate extends React.Component<IProps, IState> {
     }
 
     public render = () => {
-        const {logo, text, backgroundColor} = this.props;
+        const {logo, text, secondText, backgroundColor} = this.props;
 
         return (
             <div className="previewThumb center-hor relative gray-box topMostTemplate">
@@ -32,6 +32,7 @@ class TopMostTemplate extends React.Component<IProps, IState> {
                             'paddingLeft': 8, 'paddingRight': 8,
                             'position': 'relative'
                         }}>
+                            <div className="big-content" dangerouslySetInnerHTML={{__html: secondText}}/>
                             <div className="content" dangerouslySetInnerHTML={{__html: text}}/>
                             <div className="top-most-line"/>
                         </div>
@@ -70,7 +71,8 @@ interface IProps {
     backgroundColor: string,
     image: string,
     logo: string,
-    text: string
+    text: string,
+    secondText: string
 }
 
 interface IState {

@@ -1,6 +1,7 @@
-import {Button, Modal} from 'antd';
+import {Button, Input, Modal} from 'antd';
 import * as React from 'react';
 import Cropper from 'react-cropper';
+import ValidationUtil from "../../util/ValidationUtil";
 
 class CropModal extends React.Component<IProps, IState> {
 
@@ -9,7 +10,7 @@ class CropModal extends React.Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
-        this.state = {imageUrl: '', visible: false, source: '' };
+        this.state = {imageUrl: '', visible: false, source: '', imageLink: '' };
     }
 
     public render = () => {
@@ -29,12 +30,21 @@ class CropModal extends React.Component<IProps, IState> {
                     <Button key="back" onClick={this.actionCropCancel}>Return</Button>,
                     <Button key="submit" type="primary" onClick={this.actionCropOk}>Submit</Button>
                 ]}>
+
                 <Cropper
                     ref={(cropper:any) => this.cropper = cropper}
                     src={imageUrl}
                     style={style}
                     aspectRatio={aspectRation}
                     guides={false}/>
+
+                <div>
+                    <span className="text-link-cropper">From URL</span>
+                    <Input placeholder="https://picsum.photos/"
+                           onChange={e => this.setState({imageLink: e.target.value})}
+                           className="input-cropper" />
+                    <Button type="primary" onClick={this.selectPicture}>Select</Button>
+                </div>
             </Modal>
         );
     };
@@ -46,6 +56,12 @@ class CropModal extends React.Component<IProps, IState> {
 
     public hideCropModal = () => {
         this.setState({visible: false});
+    };
+
+    private selectPicture = () => {
+        if (ValidationUtil.isValidUrl(this.state.imageLink)) {
+            this.setState({imageUrl: this.state.imageLink});
+        }
     };
 
     private actionCropOk = () => {
@@ -70,6 +86,7 @@ interface IProps {
 }
 
 interface IState {
+    imageLink: string,
     imageUrl: any,
     visible: boolean,
     source: string

@@ -10,28 +10,26 @@ class TextLayout extends React.Component<IProps, {}> {
     }
 
     public render = () => {
-        const {text, actionChangeText} = this.props;
+        const {text, secondText, actionClickText, actionChangeText, hasSecondText, actionChangeTextSecond} = this.props;
         return (
             <div className="text-content">
                 <span className="subtitle">Add your text</span>
+
+                {hasSecondText && <TextareaAutosize
+                    minRows={1}
+                    maxRows={1}
+                    maxlength="4"
+                    value={secondText}
+                    onChange={actionChangeTextSecond}
+                />}
+
                 <TextareaAutosize
                     minRows={3}
                     maxRows={6}
                     value={text}
+                    onClick={actionClickText}
                     onChange={actionChangeText}
                 />
-
-                {/*<Editor*/}
-                    {/*editorState={text}*/}
-                    {/*toolbarClassName="toolbar-editor"*/}
-                    {/*wrapperClassName="wrapperClassName"*/}
-                    {/*editorClassName="text-editor"*/}
-                    {/*onEditorStateChange={actionChangeText}*/}
-                    {/*toolbar={{*/}
-                        {/*inline: {options: ['bold', 'italic', 'underline']},*/}
-                        {/*options: ['inline', 'fontSize', 'fontFamily', 'textAlign', 'colorPicker'],*/}
-                        {/*textAlign: {inDropdown: true},*/}
-                    {/*}}/>*/}
             </div>
         );
     };
@@ -39,7 +37,11 @@ class TextLayout extends React.Component<IProps, {}> {
 
 interface IProps {
     text: string,
+    secondText: string,
     actionChangeText: any,
+    actionClickText: any,
+    hasSecondText: any,
+    actionChangeTextSecond: any
 }
 
 export default TextLayout;

@@ -12,15 +12,19 @@ class Details extends React.Component<IProps, {}> {
     }
 
     public render = () => {
-        const {text, backgroundColor, actionBackColorChange, actionChangeText,
+        const {text, backgroundColor, actionBackColorChange, actionClickText, actionChangeText,
                 actionOnUpload, backgroundImg, logoImg,
-                hasBackground, hasCoverImage} = this.props;
+                hasBackground, hasCoverImage, secondText, hasSecondText, actionChangeTextSecond} = this.props;
         return (
             <div>
                 <Row type="flex" justify="start" align="top" className="content-margin">
                     <Col>
                         <TextLayout text={text}
-                                    actionChangeText={actionChangeText}/>
+                                    secondText={secondText}
+                                    actionClickText={actionClickText}
+                                    actionChangeText={actionChangeText}
+                                    hasSecondText={hasSecondText}
+                                    actionChangeTextSecond={actionChangeTextSecond}/>
                     </Col>
                     <div className="upload-content">
                         {hasBackground &&
@@ -65,10 +69,15 @@ interface IProps {
     backgroundImg: string,
     logoImg: string,
     actionOnUpload: any,
+    actionClickText: any,
     actionChangeText: any,
     actionBackColorChange: any,
     hasBackground: boolean,
-    hasCoverImage: boolean
+    hasCoverImage: boolean,
+
+    hasSecondText: boolean,
+    secondText: string,
+    actionChangeTextSecond: any,
 }
 
 export default Details;
